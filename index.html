@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>visit_analytics管理页</title>
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/date_format.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/baiduTemplate.js"></script>
+</head>
+<body>
+	<div id="loading" style="display: none">
+        <img src="img/loadingBar.gif"/>   
+    </div>
+    <div class="container">
+      <!-- 查找框 -->
+        <div class="form-group" role="form">
+            <div class="input-group">
+                <select class="form-control" placeholder="选择域名" >
+                    <option value="all" selected = "selected">全部</option>
+                    <option class="op"></option>
+                </select>
+                <div class="input-group-btn">
+                    <button class="btn btn-primary  btn-fw">查看访问记录</button>
+                </div>
+            </div>
+        </div>
+      <!-- 显示所有网页 -->
+        <table  class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th>网址</th>
+                    <th>标题</th>
+                    <th>总访问量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!-- <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning">查看统计图</button>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <!-- 模态框 -->
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close">&times;</button>
+                        <h4 class="modal-title" id="detailModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-inline">
+                            <label class="control-label">跨度:</label>
+                            <select class="form-control time-type">
+                                <option>按月</option>
+                                <option>按年</option>
+                            </select>
+                            <label class="control-label">截止时间</label>
+                            <!-- <input type="text" class="form-control" id="date_selected" /> -->
+                            <select class="form-control" id="date_selected">
+                                <!-- <option></option>
+                                <option></option> -->
+                            </select>
+                            <button class="btn btn-sm btn-primary btn-cx">查询</button>
+                        </div><br>
+                      <!-- 图表 -->
+                      <div id="record_chart" style="width: 560px;height: 340px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/html" id="ListTmp">
+    <%for(var n=0;n<record.data.length;n++){%>
+        <tr>
+            <td><%=record.data[n].Url%></td>
+            <td><%=record.data[n].Title%></td>
+            <td><%=record.data[n].TotalCount%></td>
+            <td>
+                <button class="btn btn-sm btn-warning">查看统计图</button>
+            </td>
+        </tr>
+    <%}%>
+</script>
+
+<script type="text/html" id="ListTmp_1">
+    <div>
+        <%for(var i=0;i<statistics_list.data.length;i++){%>
+            <option><%=statistics_list.data[i].Date%></option>
+        <%}%>
+    </div>
+</script>
+<script type="text/javascript"  src="js/number.js"></script>
+</html>
